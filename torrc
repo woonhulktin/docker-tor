@@ -4,6 +4,7 @@
 DataDirectory           /tmp/tor
 ClientTransportPlugin   obfs4 exec /usr/local/bin/obfs4proxy
 ClientTransportPlugin   meek  exec /usr/local/bin/meek-client
+#ServerTransportPlugin  meek  exec /usr/local/bin/meek-server
 RunAsDaemon             0
 AvoidDiskWrites         1
 
@@ -14,6 +15,6 @@ SOCKSPort               0.0.0.0:9050
 # ReachableAddresses    accept *:80
 
 # Get your bridge at https://bridges.torproject.org/ if needed
-# UseBridges            0
+# UseBridges            1
 # Bridge                obfs4 31.171.1  ...
 # Bridge                obfs4 107.178.1 ...

@@ -5,11 +5,11 @@ ENV GOLANG_SOURCE_GIT_REPOSITORY=https://github.com/golang/go.git \
     GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.12 \
     GOLANG_SOURCE_GIT_BOOTSTRAP_BRANCH=release-branch.go1.4 \
     TOR_SOURCE_GIT_REPOSITORY=https://git.torproject.org/tor.git \
-    TOR_SOURCE_GIT_BRANCH=release-0.4.0 \
+    TOR_SOURCE_GIT_BRANCH=tor-0.4.0.5 \
     OBFS4_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/obfs4.git \
-    OBFS4_SOURCE_GIT_BRANCH=obfs4proxy-0.0.9 \
+    OBFS4_SOURCE_GIT_BRANCH=obfs4proxy-0.0.11 \
     MEEK_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/meek.git \
-    MEEK_SOURCE_GIT_BRANCH=0.31 \
+    MEEK_SOURCE_GIT_BRANCH=0.33 \
     TOR_CUSTOM_CONFIGURATION=
 
 RUN set -ex && \
@@ -53,7 +53,7 @@ RUN set -ex && \
     && \
     cd / && \
     apk del .build-deps && \
-    /try.sh apk add --no-cache libgcc libevent openssl zlib && \
+    /try.sh apk add --no-cache libgcc libevent openssl zlib ca-certificates && \
     rm /try.sh /child.sh /tmp/* /tmp/.[!.]* /root/* /root/.[!.]* /var/cache/apk/* /var/log/* /usr/local/share/tor/* /usr/local/etc/tor/* -rf && \
     tor --version
 

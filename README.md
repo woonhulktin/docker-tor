@@ -38,7 +38,7 @@ just created, namely `tor.conf`. The command is simple as following:
       --publish 9050:9050 \
       --name tor-proxy \
       --env TOR_CUSTOM_CONFIGURATION="$(cat tor.conf)" \
-      reinit/tor:latest
+      niruix/tor:latest
 
 This will download our Image, and load it into a Container named `tor-proxy`.
 The Tor Proxy will be safely running inside this Container.
@@ -49,7 +49,7 @@ If you wanted to, you can also build this Image by yourself.
 
 To download this repository, use `git`: https://git-scm.com
 
-    $ git clone git@github.com:reinit/docker-tor.git
+    $ git clone git@github.com:niruix/docker-tor.git
     $ cd docker-tor
 
 Then start to build by using command:

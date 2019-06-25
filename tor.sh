@@ -20,7 +20,7 @@ save_custom_setting() {
 
 file_enabled() {
     if [ -z "$(which $1)" ]; then
-        echo "unavailable"
+        echo "missing"
     else
         echo "available"
     fi
@@ -31,7 +31,7 @@ echo "    Rui NI's Dockerilzed Tor Proxy"
 echo
 echo "    For protecting your privacy, not hiding your crime :)"
 echo
-echo "    ranqus@gmail.com https://github.com/reinit/docker-tor"
+echo "    ranqus@gmail.com https://github.com/niruix/docker-tor"
 echo
 
 if [ $(file_enabled tor) != "available" ]; then
@@ -57,6 +57,12 @@ if [ -z "$(cat /etc/passwd | grep $TOR_USER)" ]; then
     echo "[INF] Creating Tor user ..."
 
     adduser -D "$TOR_USER"
+fi
+
+if [ $(file_enabled update-ca-certificates) == "available" ]; then
+    echo "[INF] Trying to update system CA certificates ..."
+
+    update-ca-certificates
 fi
 
 if [ -f "$USER_CFG" ]; then
