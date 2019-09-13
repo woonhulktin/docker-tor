@@ -2,14 +2,14 @@ FROM alpine:latest
 LABEL maintainer="Rui NI <ranqus@gmail.com>"
 
 ENV GOLANG_SOURCE_GIT_REPOSITORY=https://github.com/golang/go.git \
-    GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.12 \
+    GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.13 \
     GOLANG_SOURCE_GIT_BOOTSTRAP_BRANCH=release-branch.go1.4 \
     TOR_SOURCE_GIT_REPOSITORY=https://git.torproject.org/tor.git \
-    TOR_SOURCE_GIT_BRANCH=tor-0.4.0.5 \
+    TOR_SOURCE_GIT_BRANCH=tor-0.4.1.5 \
     OBFS4_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/obfs4.git \
     OBFS4_SOURCE_GIT_BRANCH=obfs4proxy-0.0.11 \
     MEEK_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/meek.git \
-    MEEK_SOURCE_GIT_BRANCH=0.33 \
+    MEEK_SOURCE_GIT_BRANCH=0.34 \
     TOR_CUSTOM_CONFIGURATION=
 
 RUN set -ex && \
@@ -55,12 +55,13 @@ RUN set -ex && \
     apk del .build-deps && \
     /try.sh apk add --no-cache libgcc libevent openssl zlib ca-certificates && \
     rm /try.sh /child.sh /tmp/* /tmp/.[!.]* /root/* /root/.[!.]* /var/cache/apk/* /var/log/* /usr/local/share/tor/* /usr/local/etc/tor/* -rf && \
+    adduser -D tor_user && \
     tor --version
 
 ADD tor.sh /
 ADD torrc /
 
 EXPOSE 9050
-
+USER tor_user
 ENTRYPOINT [ "/tor.sh" ]
 CMD []

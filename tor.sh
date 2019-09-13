@@ -2,7 +2,6 @@
 
 USER_CFG=/torrc-user
 DEFAULT_CFG=/torrc
-TOR_USER=tor_user
 
 has_custom_setting() {
     if [ -z "$1" ]; then
@@ -53,12 +52,6 @@ if [ $(has_custom_setting "$TOR_CUSTOM_CONFIGURATION") -gt 0 ]; then
     save_custom_setting "$USER_CFG" "$TOR_CUSTOM_CONFIGURATION"
 fi
 
-if [ -z "$(cat /etc/passwd | grep $TOR_USER)" ]; then
-    echo "[INF] Creating Tor user ..."
-
-    adduser -D "$TOR_USER"
-fi
-
 if [ $(file_enabled update-ca-certificates) == "available" ]; then
     echo "[INF] Trying to update system CA certificates ..."
 
@@ -68,10 +61,10 @@ fi
 if [ -f "$USER_CFG" ]; then
     echo
 
-    su - "$TOR_USER" -c "tor --defaults-torrc $DEFAULT_CFG -f $USER_CFG $@"; exit $?
+    tor --defaults-torrc $DEFAULT_CFG -f $USER_CFG $@
 else
     echo "[INF] No custom settings, use default from the Docker Image ..."
     echo
 
-    su - "$TOR_USER" -c "tor --defaults-torrc $DEFAULT_CFG $@"; exit $?
+    tor --defaults-torrc $DEFAULT_CFG $@
 fi
