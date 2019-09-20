@@ -1,6 +1,6 @@
 #!/bin/sh
 
-USER_CFG=/torrc-user
+USER_CFG=/tmp/torrc-user
 DEFAULT_CFG=/torrc
 
 has_custom_setting() {
