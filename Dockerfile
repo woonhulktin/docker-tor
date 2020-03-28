@@ -2,10 +2,10 @@ FROM alpine:latest
 LABEL maintainer="Rui NI <ranqus@gmail.com>"
 
 ENV GOLANG_SOURCE_GIT_REPOSITORY=https://github.com/golang/go.git \
-    GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.13 \
+    GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.14 \
     GOLANG_SOURCE_GIT_BOOTSTRAP_BRANCH=release-branch.go1.4 \
     TOR_SOURCE_GIT_REPOSITORY=https://git.torproject.org/tor.git \
-    TOR_SOURCE_GIT_BRANCH=tor-0.4.1.5 \
+    TOR_SOURCE_GIT_BRANCH=tor-0.4.2.7 \
     OBFS4_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/obfs4.git \
     OBFS4_SOURCE_GIT_BRANCH=obfs4proxy-0.0.11 \
     MEEK_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/meek.git \
