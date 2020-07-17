@@ -5,11 +5,11 @@ ENV GOLANG_SOURCE_GIT_REPOSITORY=https://github.com/golang/go.git \
     GOLANG_SOURCE_GIT_BRANCH=release-branch.go1.14 \
     GOLANG_SOURCE_GIT_BOOTSTRAP_BRANCH=release-branch.go1.4 \
     TOR_SOURCE_GIT_REPOSITORY=https://git.torproject.org/tor.git \
-    TOR_SOURCE_GIT_BRANCH=tor-0.4.2.7 \
+    TOR_SOURCE_GIT_BRANCH=tor-0.4.3.6 \
     OBFS4_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/obfs4.git \
     OBFS4_SOURCE_GIT_BRANCH=obfs4proxy-0.0.11 \
     MEEK_SOURCE_GIT_REPOSITORY=https://git.torproject.org/pluggable-transports/meek.git \
-    MEEK_SOURCE_GIT_BRANCH=0.34 \
+    MEEK_SOURCE_GIT_BRANCH=v0.35.0 \
     TOR_CUSTOM_CONFIGURATION=
 
 RUN set -ex && \
