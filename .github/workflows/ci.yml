@@ -18,15 +18,13 @@ jobs:
           export DOCKER_CLI_EXPERIMENTAL=enabled
           export DOCKER_HUB_USER="${{ github.repository_owner }}"
           export DOCKER_HUB_PASSWORD="${{ secrets.DOCKER_HUB_PASSWORD }}"
-          export DOCKER_IMAGE_TAG="$DOCKER_HUB_USER:/tor"
+          export DOCKER_IMAGE_TAG="$DOCKER_HUB_USER/tor"
 
           export BUILD_VERSION="$(git describe --always --dirty='*' --tag)"
-          export DOCKER_IMAGE_TAG="$DOCKER_IMAGE_TAG:$BUILD_VERSION"
-          export DOCKER_IMAGE_TAG_LATEST="$DOCKER_IMAGE_TAG:latest"
+          export DOCKER_HUB_IMAGE_TAG="$DOCKER_IMAGE_TAG:$BUILD_VERSION"
+          export DOCKER_HUB_IMAGE_TAG_LATEST="$DOCKER_IMAGE_TAG:latest"
 
-          echo "res=0; for i in \$(seq 0 29); do \$@; res=\$?; [ \$res == 0 ] && exit \$res || sleep 10; done; exit \$res" > ./try.sh && chmod +x ./try.sh
-
-          cat "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
-          ./try.sh docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx create --use --driver docker-container --name buildx-instance
-          ./try.sh docker buildx build --tag "$DOCKER_IMAGE_TAG" --tag "$DOCKER_IMAGE_TAG_LATEST" --platform "$DOCKER_BUILD_TARGETS" --push .
+          docker buildx build --tag "$DOCKER_HUB_IMAGE_TAG" --tag "$DOCKER_HUB_IMAGE_TAG_LATEST" --platform "$DOCKER_BUILD_TARGETS" --push .
