@@ -1,0 +1,7 @@
+
+version: '3'
+services:
+    tor:
+        image: tor-proxy:Dockerfile
+        ports:
+            - '9050:9050'

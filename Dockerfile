@@ -49,6 +49,7 @@ RUN set -ex && \
 
 ADD tor.sh /
 ADD torrc /
+ADD torrc usr/local/bin/etc/tor/
 
 EXPOSE 9050
 USER tor_user
